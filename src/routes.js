@@ -9,6 +9,7 @@ import Dashboard from "./views/Dashboard";
 import Customers from "./views/Customers";
 import Products from "./views/Products";
 import Errors from "./views/Errors";
+import Mitra from "./views/Mitra";
 import Transaction from "./views/Transaction";
 import Login from "./views/Login";
 
@@ -48,6 +49,11 @@ export default [
     path: "/transaction",
     layout: DefaultLayout,
     component: Transaction
+  },
+  {
+    path: "/mitra",
+    layout: DefaultLayout,
+    component: Mitra
   },
  
 ];

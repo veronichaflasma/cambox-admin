@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import FormCustomers from "./Forms/FormCustomers"
+import FormCustomers from "./Forms/FormMitra"
 import firebaseDb from '../firebase/firebase'
 import {
   Container,
@@ -14,14 +14,14 @@ import {
 import PageTitle from "../components/common/PageTitle";
 
 
-const Customers = () =>{
+const Mitra = () =>{
 
   var [contactObjects,setContactObjects] = useState({})
   //implement form
   var [currentId,setCurrentId] = useState('')
 
   useEffect(()=>{
-      firebaseDb.child('Account').on('value',snapshot =>{
+      firebaseDb.child('Courier').on('value',snapshot =>{
           if(snapshot.val()!= null)
               setContactObjects({
                   ...snapshot.val()
@@ -34,7 +34,7 @@ const Customers = () =>{
 
   const addOrEdit = obj => {
       if(currentId=='')
-          firebaseDb.child('Account').push(
+          firebaseDb.child('Courier').push(
               obj,
               err =>{
                   if(err)
@@ -44,7 +44,7 @@ const Customers = () =>{
               }
           )
       else
-          firebaseDb.child(`Account/${currentId}`).set(
+          firebaseDb.child(`Courier/${currentId}`).set(
               obj,
               err =>{
                   if(err)
@@ -57,7 +57,7 @@ const Customers = () =>{
 
   const onDelete = key=>{
       if(window.confirm('Are u sure delete this record?')){
-          firebaseDb.child(`Account/${key}`).remove(
+          firebaseDb.child(`Courier/${key}`).remove(
            
               err =>{
                   if(err)
@@ -74,7 +74,7 @@ const Customers = () =>{
         <Row noGutters className="page-header py-4">
           <PageTitle
             sm="4"
-            title="Customers"
+            title="Courier"
             subtitle="Overview"
             className="text-sm-left"
           />
@@ -84,7 +84,7 @@ const Customers = () =>{
             {/* Complete Form Example */}
             <Card small>
               <CardHeader className="border-bottom">
-                <h6 className="m-0">Form Customers</h6>
+                <h6 className="m-0">Form Courier</h6>
               </CardHeader>
               <FormCustomers {...({addOrEdit,currentId,contactObjects})}/>
             </Card>
@@ -102,14 +102,12 @@ const Customers = () =>{
                           Name
                         </th>
                         <th scope="col" className="border-0">
-                          email
+                          price
                         </th>
-                        <th scope="col" className="border-0">
-                          password
-                        </th>
-                        <th scope="col" className="border-0">
+                    
+                        {/* <th scope="col" className="border-0">
                           phone
-                        </th>
+                        </th> */}
                        
                       </tr>
                     </thead>
@@ -119,9 +117,9 @@ const Customers = () =>{
                         return  <tr key={id}>
                                   <td></td>
                                   <td>{contactObjects[id].name}</td>
-                                  <td>{contactObjects[id].email}</td>
-                                  <td>{contactObjects[id].password}</td>
-                                  <td>{contactObjects[id].phone}</td>
+                                
+                                  <td>{contactObjects[id].price}</td>
+                                  {/* <td>{contactObjects[id].phone}</td> */}
                                   <td>
                                     <a className="btn text-primary" onClick= {() => {setCurrentId(id)}}>
                                       <i className="fas fa-pencil-alt"></i>
@@ -145,4 +143,4 @@ const Customers = () =>{
     </div>
   )
 }
-export default Customers;
+export default Mitra;

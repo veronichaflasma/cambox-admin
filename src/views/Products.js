@@ -109,6 +109,9 @@ const Products = () =>{
                           Price
                         </th>
                         <th scope="col" className="border-0">
+                          Discount
+                        </th>
+                        <th scope="col" className="border-0">
                           Image
                         </th>
                         <th scope="col" className="border-0">
@@ -126,6 +129,7 @@ const Products = () =>{
                                   <td></td>
                                   <td>{contactObjects[id].name}</td>
                                   <td>{contactObjects[id].price}</td>
+                                  <td>{contactObjects[id].discount}%</td>
                                   <td>{contactObjects[id].img}</td>
                                   <td>{contactObjects[id].desc}</td>
                                   <td>{contactObjects[id].product_date}</td>

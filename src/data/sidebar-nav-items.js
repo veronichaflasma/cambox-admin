@@ -32,6 +32,11 @@ export default function() {
       to: "/customers",
     },
     {
+      title: "Mitra",
+      htmlBefore: '<i class="material-icons">person</i>',
+      to: "/mitra",
+    },
+    {
       title: "Errors",
       htmlBefore: '<i class="material-icons">error</i>',
       to: "/errors",

@@ -16,7 +16,7 @@ const ProductsForm = (props) =>{
           product_date: '',
           stock: '',
           img:'',
-          img_token:'',
+        //  img_token:'',
           discount:'',
           // key:'',
           desc:''
@@ -67,8 +67,16 @@ const ProductsForm = (props) =>{
             <div className="form-row">
               <div className="form-group input-group">
                 <input className="form-control" 
-                      placeholder="Price" 
+                      placeholder="Price" type="number"
                       name="price" value={values.price}
+                      onChange = {handleInputChange}/>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group input-group">
+                <input className="form-control" 
+                      placeholder="Dicount" type="number"
+                      name="discount" value={values.discount}
                       onChange = {handleInputChange}/>
               </div>
             </div>
@@ -76,7 +84,7 @@ const ProductsForm = (props) =>{
               <div className="form-group input-group">
                 <input className="form-control"  type="file"
                       placeholder="image" 
-                      name="image" value={values.img}
+                      name="img" value={values.img}
                       onChange = {handleInputChange}/>
               </div>
             </div>
@@ -84,7 +92,7 @@ const ProductsForm = (props) =>{
             <div className="form-row">
               <div className="form-group input-group">
                 <input className="form-control" 
-                      placeholder="stock" 
+                      placeholder="stock" type="number"
                       name="stock" value={values.stock}
                       onChange = {handleInputChange}/>
               </div>
@@ -92,7 +100,7 @@ const ProductsForm = (props) =>{
             <div className="form-row">
               <div className="form-group input-group">
                 <input className="form-control" 
-                        placeholder="10-11-2020" 
+                        placeholder="10-11-2020" type="date"
                         name="product_date" value={values.product_date}
                         onChange = {handleInputChange}/>
               </div>
