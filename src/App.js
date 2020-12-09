@@ -14,8 +14,7 @@ import Dashboard from "./views/Dashboard";
 export default () => (
   <Router basename={process.env.REACT_APP_BASENAME || ""}>
     <div>
-{/*       
-      <Dashboard/> */}
+
       {routes.map((route, index) => {
         return (
           <Route

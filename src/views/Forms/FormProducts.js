@@ -1,4 +1,6 @@
 import React,{useState,useEffect} from "react";
+import {storage} from "../../firebase/firebase"
+
 import {
   ListGroup,
   ListGroupItem,
@@ -10,20 +12,21 @@ import {
 
 
 const ProductsForm = (props) =>{
+
   const initialFileValues = {
           name: '',
           price: '',
           product_date: '',
           stock: '',
           img:'',
-        //  img_token:'',
-          discount:'',
-          // key:'',
+          disc:'',
           desc:''
 
       }
   
       var [values,setValues] = useState(initialFileValues)
+  const [url, setUrl] = useState("");
+  const [progress, setProgress] = useState(0);
   
       //editform
   useEffect(()=>{
@@ -37,20 +40,54 @@ const ProductsForm = (props) =>{
           })
   },[props.currentId, props.contactObject])
   
-  const handleInputChange = e =>{
+  const handleInputChange = (e)=>{
       var {name,value}= e.target
-      setValues(
-          {
-              ...values,
-              [name]: value
+      var {name,value}= e.target
+      if(e.target.files) {
+        const fileName = new Date().getTime() + e.target.files[0].name
+        const uploadTask = storage.ref(`item_image/${fileName}`).put(e.target.files[0]);
+        uploadTask.on(
+          "state_changed",
+          snapshot => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgress(progress);
+          },
+          error => {
+            console.log(error);
+          },
+          () => {
+            storage.ref(`item_image/${fileName}`)
+            .getDownloadURL()
+            .then(url => {
+              setValues({ 
+                ...values,
+                [name]: fileName
+              })
+              setUrl(url)
+            });
           }
-      )
-  }    
+        );
+      }else{
+        setValues(
+            {
+                ...values,
+                [name]: value,
+                
+                
+            }
+        )
+      }
+
+  }
   
   const handleFormSubmit = e =>{
-      e.preventDefault();
-      props.addOrEdit(values)
+ 
+    e.preventDefault();
+    props.addOrEdit(values)
   }
+
   return(
     <ListGroupItem className="p-3">
       <Row>
@@ -76,16 +113,21 @@ const ProductsForm = (props) =>{
               <div className="form-group input-group">
                 <input className="form-control" 
                       placeholder="Dicount" type="number"
-                      name="discount" value={values.discount}
+                      name="disc" value={values.disc}
                       onChange = {handleInputChange}/>
               </div>
             </div>
             <div className="form-row">
+            <progress value={progress} max="100"/>
               <div className="form-group input-group">
                 <input className="form-control"  type="file"
                       placeholder="image" 
-                      name="img" value={values.img}
+                      name="img"
                       onChange = {handleInputChange}/>
+                      {/* {url}
+                      <img src={url || "http://via.placeholder.com/100"} alt="firebase-image" /> */}
+              <div>
+              </div>
               </div>
             </div>
             
@@ -105,13 +147,7 @@ const ProductsForm = (props) =>{
                         onChange = {handleInputChange}/>
               </div>
             </div>
-            {/* <div className="form-row">
-              <div className="form-group input-group">
-                <input className="form-control" 
-                      name="key" value={values.key}
-                      onChange = {handleInputChange}/>
-              </div>
-            </div> */}
+         
             <div className="form-row">
               <div className="form-group input-group">
                 <input className="form-control" 
@@ -130,7 +166,6 @@ const ProductsForm = (props) =>{
       </Row>
     </ListGroupItem>
 
-    
 
   )
 }

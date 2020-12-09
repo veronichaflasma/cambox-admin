@@ -1,0 +1,8 @@
+import React from "react";
+import Login from "../views/Login";
+
+const DefaultLogin = ({  }) => (
+      <Login></Login>
+);
+
+export default DefaultLogin;

@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import FormProducts from "./Forms/FormProducts"
 import firebaseDb from '../firebase/firebase'
+
 import {
   Container,
   Row,
@@ -59,10 +60,9 @@ const Products = () =>{
           )
   }
 
-  const onDelete = key=>{
+  const onDelete = (key,img)=>{
       if(window.confirm('Are u sure delete this record?')){
           firebaseDb.child(`Item/${key}`).remove(
-           
               err =>{
                   if(err)
                       console.log(err)
@@ -71,6 +71,14 @@ const Products = () =>{
               }
           )
       }
+      // const {fileName} = this.state;
+      let imageRef = firebaseDb.storage().ref('/' + img);
+      imageRef
+        .delete()
+        .then(() => {
+          console.log(`${img}has been deleted successfully.`);
+        })
+        .catch((e) => console.log('error on image deletion => ', e));
   }
   return(
     <div>

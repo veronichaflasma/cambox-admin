@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 
 // Layout Types
 import { DefaultLayout } from "./layouts";
+import { DefaultLogin } from "./Login";
 
 // Route Views
 import Dashboard from "./views/Dashboard";
@@ -11,20 +12,20 @@ import Products from "./views/Products";
 import Errors from "./views/Errors";
 import Mitra from "./views/Mitra";
 import Transaction from "./views/Transaction";
-import Login from "./views/Login";
+
 
 export default [
   {
     path: "/",
     exact: true,
-    layout: DefaultLayout,
-    component: () => <Redirect to="/dashboard" />
+    layout: DefaultLogin,
+    component: () => <Redirect to="/login" />
   },
-  {
-    path: "/login",
-    layout: DefaultLayout,
-    component: Login
-  },
+  // {
+  //   path: "/login",
+  //   layout: DefaultLayout,
+  //   component: Login
+  // },
   {
     path: "/dashboard",
     layout: DefaultLayout,

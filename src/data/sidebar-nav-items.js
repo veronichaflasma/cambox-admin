@@ -1,5 +1,11 @@
 export default function() {
   return [
+    // {
+    //   title: "Login",
+    //   to: "/login",
+    //   htmlBefore: '<i class="material-icons">edit</i>',
+    //   htmlAfter: ""
+    // },
     {
       title: "Dashboard",
       to: "/dashboard",
@@ -27,12 +33,12 @@ export default function() {
     //   to: "/tables",
     // },
     {
-      title: "User",
+      title: "Customers",
       htmlBefore: '<i class="material-icons">person</i>',
       to: "/customers",
     },
     {
-      title: "Mitra",
+      title: "Courier",
       htmlBefore: '<i class="material-icons">person</i>',
       to: "/mitra",
     },

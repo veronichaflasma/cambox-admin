@@ -1,6 +1,11 @@
 import firebase from 'firebase/app'
 import 'firebase/database'
 
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
+import 'firebase/storage'
+
 var firebaseConfig = {
     apiKey: "AIzaSyAtQR6azLL2B1SlLcB-2Xu1I0lExxFDnnA",
     authDomain: "cambox-d0b24.firebaseapp.com",
@@ -14,4 +19,10 @@ var firebaseConfig = {
   // Initialize Firebase
   var fireDb = firebase.initializeApp(firebaseConfig);
 
-  export default fireDb.database().ref();
+
+export const database =  fireDb.database();
+export const auth = fireDb.auth();
+export const firestore = fireDb.firestore();
+export const storage = fireDb.storage();
+
+export default fireDb.database().ref();
