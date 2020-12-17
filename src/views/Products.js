@@ -1,6 +1,9 @@
 import React,{useState,useEffect} from "react";
-import FormProducts from "./Forms/FormProducts"
-import firebaseDb from '../firebase/firebase'
+import FormProducts from "./Forms/FormProducts";
+import firebaseDb from '../firebase/firebase';
+
+
+
 
 import {
   Container,
@@ -60,9 +63,10 @@ const Products = () =>{
           )
   }
 
-  const onDelete = (key,img)=>{
+  const onDelete = (key)=>{
       if(window.confirm('Are u sure delete this record?')){
           firebaseDb.child(`Item/${key}`).remove(
+            
               err =>{
                   if(err)
                       console.log(err)
@@ -70,16 +74,41 @@ const Products = () =>{
                       setCurrentId('')
               }
           )
+          // storage.ref(`item_image/${fileName}`).remove()
       }
-      // const {fileName} = this.state;
-      let imageRef = firebaseDb.storage().ref('/' + img);
-      imageRef
-        .delete()
-        .then(() => {
-          console.log(`${img}has been deleted successfully.`);
-        })
-        .catch((e) => console.log('error on image deletion => ', e));
+
+       // Create a reference to the file to delete
+      // var storage = require('@google-cloud/storage')
+      // var desertRef = firebaseDb.storage().child(`item_image/${fileName}`);
+
+      // Delete the file
+      // desertRef.delete().then(function() {
+        // File deleted successfully
+      // }).catch(function(error) {
+        // Uh-oh, an error occurred!
+      // });
   }
+
+ 
+
+  // const onDelete = (key) => {
+  //   var desertRef = firebaseDb.storage().refFromURL(this.this.state.item.url)
+  //   firebaseDb.firestore().collection(`item_image/${key}`).doc(key).delete().then(()=>{
+  //     console.log("Succesfully deleted")
+  //     this.props.history.push("/")
+  //   }).catch((error)=>{
+  //     console.error("Error is ",error);
+  //   });
+
+  //   desertRef.delete().then(function(){
+  //     console.log('file deleted')
+  //   }).catch(function(error){
+  //     console.log('error while deleting the file')
+  //   });
+  // }
+
+
+
   return(
     <div>
       <Container fluid className="main-content-container px-4">
@@ -133,11 +162,12 @@ const Products = () =>{
                     <tbody>
                       {
                         Object.keys(contactObjects).map(id=>{
-                        return  <tr key={id}>
+                        return  <tr key={id} >
                                   <td></td>
                                   <td>{contactObjects[id].name}</td>
                                   <td>{contactObjects[id].price}</td>
                                   <td>{contactObjects[id].discount}%</td>
+                                  
                                   <td>{contactObjects[id].img}</td>
                                   <td>{contactObjects[id].desc}</td>
                                   <td>{contactObjects[id].product_date}</td>
@@ -147,6 +177,8 @@ const Products = () =>{
                                     </a>
                                   </td>
                                   <td>
+                                      {/* <a className="btn text-danger" onClick={this.onDelete.bind(this, this.state.key)}> */}
+
                                       <a className="btn text-danger" onClick={()=> {onDelete(id)}}>
                                           <i className="fas fa-trash-alt"></i>
                                       </a>

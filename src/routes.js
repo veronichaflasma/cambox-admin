@@ -19,7 +19,7 @@ export default [
     path: "/",
     exact: true,
     layout: DefaultLogin,
-    component: () => <Redirect to="/login" />
+    component: () => <Redirect to="/" />
   },
   // {
   //   path: "/login",
