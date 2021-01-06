@@ -5,7 +5,9 @@
 
 - Flasma Veronicha H
 
-- Revinda Amalia
+- Revinda Amalia S
+
+- Esti Putri J
 
 For the Client (Mobile App) 
 - https://github.com/ezio341/Cambox.git
